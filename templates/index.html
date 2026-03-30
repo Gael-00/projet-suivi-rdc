@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - Plateforme de Gestion{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="page-title">
+            <i class="fas fa-home"></i> Bienvenue sur la Plateforme de Gestion
+        </h1>
+    </div>
+</div>
+
+{% if user.is_authenticated %}
+    <!-- Statistiques -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <span class="stat-number">{{ total_projets|default:"0" }}</span>
+                <span class="stat-label">Projets au total</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card" style="background: linear-gradient(135deg, var(--secondary-color), #14b8a6);">
+                <span class="stat-number">{{ projets_en_cours|default:"0" }}</span>
+                <span class="stat-label">Projets en cours</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">
+                <span class="stat-number">{{ budget_total|default:"0" }}</span>
+                <span class="stat-label">Budget total</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card" style="background: linear-gradient(135deg, #f59e0b, #f97316);">
+                <span class="stat-number">{{ montant_finance|default:"0" }}</span>
+                <span class="stat-label">Financé</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions principales -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h3 class="page-title">Actions rapides</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-list fa-3x" style="color: var(--primary-color);"></i>
+                    <h5 class="card-title mt-3">Voir les projets</h5>
+                    <p class="card-text">Consultez la liste de tous les projets</p>
+                    <a href="{% url 'projets:projet-list' %}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-arrow-right"></i> Accéder
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-plus-circle fa-3x" style="color: var(--secondary-color);"></i>
+                    <h5 class="card-title mt-3">Nouveau projet</h5>
+                    <p class="card-text">Créer un nouveau projet</p>
+                    <a href="{% url 'projets:projet-create' %}" class="btn btn-success btn-sm">
+                        <i class="fas fa-arrow-right"></i> Créer
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-money-bill fa-3x" style="color: #ec4899;"></i>
+                    <h5 class="card-title mt-3">Financements</h5>
+                    <p class="card-text">Suivi des financements</p>
+                    <a href="{% url 'financement:financement-list' %}" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-arrow-right"></i> Voir
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-pie fa-3x" style="color: #f59e0b;"></i>
+                    <h5 class="card-title mt-3">Rapports</h5>
+                    <p class="card-text">Rapport de financement</p>
+                    <a href="{% url 'financement:rapport-financement' %}" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-arrow-right"></i> Voir
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Information utilisateur -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-info">
+                <h5>Bienvenue, <strong>{{ user.get_full_name }}</strong>!</h5>
+                <p>Vous êtes connecté avec le rôle: <span class="badge bg-primary">{{ user.role|upper }}</span></p>
+                <p>Institution: <span class="badge bg-secondary">{{ user.institution }}</span></p>
+            </div>
+        </div>
+    </div>
+
+{% else %}
+    <!-- Page d'accueil non authentifiée -->
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h2 class="card-title mb-4">Plateforme de Gestion de Suivi de Projets Financés</h2>
+                    <p class="card-text lead mb-4">
+                        République Démocratique du Congo (RDC)
+                    </p>
+                    <p class="card-text">
+                        Bienvenue sur la plateforme de suivi et de gestion complète des projets financés. 
+                        Connectez-vous pour accéder à vos projets, gérer les financements et suivre les dépenses.
+                    </p>
+                    <hr>
+                    <div class="mt-4">
+                        <a href="{% url 'utilisateurs:login' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-sign-in-alt"></i> Se connecter
+                        </a>
+                    </div>
+                    <p class="text-muted mt-4">
+                        Vous n'avez pas de compte? Contactez l'administrateur système.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Informations sur l'application -->
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-lock fa-2x" style="color: var(--primary-color);"></i>
+                            <h5 class="card-title mt-3">Sécurisé</h5>
+                            <p class="card-text">Authentification sécurisée et contrôle d'accès</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-shield-alt fa-2x" style="color: var(--secondary-color);"></i>
+                            <h5 class="card-title mt-3">Fiable</h5>
+                            <p class="card-text">Base de données robuste et sauvegardée</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-chart-line fa-2x" style="color: #f59e0b;"></i>
+                            <h5 class="card-title mt-3">Rapports</h5>
+                            <p class="card-text">Suivi détaillé et analyses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

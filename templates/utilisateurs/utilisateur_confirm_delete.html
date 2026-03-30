@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Confirmer la Suppression{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h3 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Confirmation de Suppression</h3>
+                </div>
+                <div class="card-body text-center">
+                    <p class="lead mb-4">Êtes-vous certain de vouloir supprimer cet utilisateur?</p>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-info-circle"></i> 
+                        <strong>Attention:</strong> Cette action est irréversible.
+                    </div>
+
+                    <div class="bg-light p-3 rounded mb-4">
+                        <p class="mb-1"><strong>Utilisateur:</strong> {{ object.get_full_name }}</p>
+                        <p class="mb-0"><strong>Email:</strong> {{ object.email }}</p>
+                    </div>
+
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        <a href="{% url 'utilisateurs:utilisateur-detail' object.pk %}" class="btn btn-secondary me-2">
+                            <i class="fas fa-times"></i> Annuler
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Oui, Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

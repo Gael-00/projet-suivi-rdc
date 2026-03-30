@@ -1,0 +1,76 @@
+# Python
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+.collectstatic
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Environment
+.env
+.env.local
+*.keys
+*.pem
+
+# Cache
+__pycache__/
+.cache/
+*.cache
+.pytest_cache/
+
+# Backup
+*.bak
+*.swp
+~*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+
+# Testing
+.coverage
+.tox/
+.hypothesis/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Misc
+.idea/
+.vscode/
+.DS_Store
+*.pid
