@@ -18,7 +18,7 @@ class UtilisateurLoginView(LoginView):
         return reverse_lazy('dashboard')
 
 
-class UtilisateurLogoutView(LoginRequiredMixin, LogoutView):
+class UtilisateurLogoutView(LogoutView):
     """Vue de déconnexion"""
     next_page = reverse_lazy('utilisateurs:login')
 

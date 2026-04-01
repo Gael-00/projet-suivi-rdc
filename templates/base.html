@@ -188,7 +188,14 @@
                             <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" href="{% url 'utilisateurs:mon-profil' %}">Mon profil</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{% url 'utilisateurs:logout' %}">Déconnexion</a></li>
+                                <li>
+                                    <form method="post" action="{% url 'utilisateurs:logout' %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item" style="border: none; background: none; cursor: pointer; width: 100%; text-align: left; padding: 0.5rem 1rem;">
+                                            Déconnexion
+                                        </button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                     {% else %}
